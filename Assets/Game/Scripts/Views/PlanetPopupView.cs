@@ -9,11 +9,13 @@ namespace Game.Views
 {
     public sealed class PlanetPopupView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _populationText;
-        [SerializeField] private TextMeshProUGUI _levelText;
-        [SerializeField] private TextMeshProUGUI _incomeText;
+        [SerializeField] private TextMeshProUGUI _title;
+        [SerializeField] private TextMeshProUGUI _population;
+        [SerializeField] private TextMeshProUGUI _level;
+        [SerializeField] private TextMeshProUGUI _income;
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _upgradeButton;
+        [SerializeField] private GameObject _popup;
 
         private PlanetPopupPresenter _planetPopupPresenter;
 
@@ -26,10 +28,10 @@ namespace Game.Views
         private void Awake()
         {
             _closeButton.OnClickAsObservable()
-                .Subscribe(_ => _planetPopupPresenter.OnCloseClicked())
+                .Subscribe(_ => _planetPopupPresenter.Hide())
                 .AddTo(this);
             _upgradeButton.OnClickAsObservable()
-                .Subscribe(_ => _planetPopupPresenter.OnUpgradeClicked())
+                .Subscribe(_ => _planetPopupPresenter.Upgrade())
                 .AddTo(this);
             
             _planetPopupPresenter.IsVisible
@@ -37,7 +39,7 @@ namespace Game.Views
                 .AddTo(this);
         }
 
-        private void SetIsVisible(bool isVisible) => gameObject.SetActive(isVisible);
+        private void SetIsVisible(bool isVisible) => _popup.SetActive(isVisible);
         
     }
 }

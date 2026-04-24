@@ -6,13 +6,19 @@ namespace Game.Presenters
     {
         public ReadOnlyReactiveProperty<bool> IsVisible => _isVisible;
         private readonly ReactiveProperty<bool> _isVisible = new(false);
-
-        public void OnCloseClicked()
+        
+        public void Hide()
         {
             _isVisible.Value = false;
         }
-        
-        public void OnUpgradeClicked(){}
-        
+
+        public void Show()
+        {
+            _isVisible.Value = true;
+        }
+
+        public void Upgrade()
+        {
+        }
     }
 }
