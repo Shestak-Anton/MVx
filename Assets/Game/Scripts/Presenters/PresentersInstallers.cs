@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Modules.Planets;
 using UnityEngine;
 using Zenject;
 
@@ -14,10 +16,17 @@ namespace Game.Presenters
             Container
                 .BindInterfacesAndSelfTo<PlanetPopupPresenter>()
                 .AsSingle();
-
             Container
-                .BindInterfacesAndSelfTo<PlanetPresenter>()
+                .BindInterfacesAndSelfTo<GamePresenter>()
+                .AsSingle();
+            Container
+                .BindInterfacesAndSelfTo<CoinDepositPresenter>()
+                .AsSingle();
+            Container
+                .BindFactory<IPlanet, PlanetPresenter, PlanetPresenter.Factory>()
                 .AsSingle();
         }
+        
+        
     }
 }

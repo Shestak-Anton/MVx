@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4069365071620109237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -502,8 +502,10 @@ MonoBehaviour:
   _lock: {fileID: 991180089803824017}
   _coin: {fileID: 648301223005266422}
   _progressBar: {fileID: 6948507870913343312}
+  _income: {fileID: 5564512366540979095}
   _time: {fileID: 8019802931863089282}
   _price: {fileID: 5444377921757551026}
+  _priceContainter: {fileID: 6850814019076832775}
   _smartButton: {fileID: 5583372068559771244}
 --- !u!1 &5564512366540979095
 GameObject:

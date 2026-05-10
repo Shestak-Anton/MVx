@@ -10,11 +10,14 @@ namespace Game.Views
                 .Bind<PlanetPopupView>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-
+            Container
+                .Bind<CoinDepositView>()
+                .FromComponentInHierarchy()
+                .AsCached();
             Container
                 .Bind<PlanetView>()
                 .FromComponentInHierarchy()
-                .AsSingle();
+                .AsCached();
         }
     }
 }
