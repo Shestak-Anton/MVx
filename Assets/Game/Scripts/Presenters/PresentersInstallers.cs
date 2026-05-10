@@ -22,11 +22,16 @@ namespace Game.Presenters
             Container
                 .BindInterfacesAndSelfTo<CoinDepositPresenter>()
                 .AsSingle();
+            
+            BindPlanetPresenterFactory<PlanetPresenter>();
+            BindPlanetPresenterFactory<TimeProgressPresenter>();
+        }
+
+        private void BindPlanetPresenterFactory<TPresenter>() where TPresenter : IPresenter
+        {
             Container
-                .BindFactory<IPlanet, PlanetPresenter, PlanetPresenter.Factory>()
+                .BindFactory<IPlanet, TPresenter, PlanetPresenterFactory<TPresenter>>()
                 .AsSingle();
         }
-        
-        
     }
 }

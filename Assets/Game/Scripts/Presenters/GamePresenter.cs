@@ -1,21 +1,23 @@
 using System.Collections.Generic;
 using Modules.Planets;
 using ObservableCollections;
-using R3;
 using Zenject;
 
 namespace Game.Presenters
 {
-    public sealed class GamePresenter : IInitializable
+    public sealed class GamePresenter : IPresenter
     {
-        private readonly PlanetPresenter.Factory _planetPresenterFactory;
+        public IObservableCollection<PlanetPresenter> PlanetPresenters => _planetPresenters;
+        private readonly ObservableList<PlanetPresenter> _planetPresenters = new();
+
+        private readonly PlanetPresenterFactory<PlanetPresenter> _planetPresenterFactory;
         private readonly List<IPlanet> _planets;
 
-        public IObservableCollection<PlanetPresenter> Presenters => _presenters;
-        private readonly ObservableList<PlanetPresenter> _presenters = new();
-
         [Inject]
-        public GamePresenter(List<IPlanet> planets, PlanetPresenter.Factory planetPresenterFactory)
+        public GamePresenter(
+            List<IPlanet> planets,
+            PlanetPresenterFactory<PlanetPresenter> planetPresenterFactory
+        )
         {
             _planets = planets;
             _planetPresenterFactory = planetPresenterFactory;
@@ -26,7 +28,7 @@ namespace Game.Presenters
             foreach (var planet in _planets)
             {
                 var planetPresenter = _planetPresenterFactory.Create(planet);
-                _presenters.Add(planetPresenter);
+                _planetPresenters.Add(planetPresenter);
             }
         }
     }

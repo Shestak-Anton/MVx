@@ -501,12 +501,11 @@ MonoBehaviour:
   _icon: {fileID: 606508972301849034}
   _lock: {fileID: 991180089803824017}
   _coin: {fileID: 648301223005266422}
-  _progressBar: {fileID: 6948507870913343312}
   _income: {fileID: 5564512366540979095}
-  _time: {fileID: 8019802931863089282}
   _price: {fileID: 5444377921757551026}
   _priceContainter: {fileID: 6850814019076832775}
   _smartButton: {fileID: 5583372068559771244}
+  _timeProgressView: {fileID: 3146794706767981009}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +517,7 @@ GameObject:
   - component: {fileID: 1921716995094703198}
   - component: {fileID: 7366688001666472230}
   - component: {fileID: 5072925286837728165}
+  - component: {fileID: 3146794706767981009}
   m_Layer: 5
   m_Name: Income
   m_TagString: Untagged
@@ -584,6 +584,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &3146794706767981009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564512366540979095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e252b7797c4e4f881a06601149f375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.TimeProgressView
+  _progressBar: {fileID: 6948507870913343312}
+  _time: {fileID: 8019802931863089282}
 --- !u!1 &6740194235726008877
 GameObject:
   m_ObjectHideFlags: 0

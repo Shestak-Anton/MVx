@@ -1,11 +1,10 @@
-using System;
 using Game.Presenters;
 using Modules.UI;
+using ObservableCollections;
 using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Game.Views
 {
@@ -14,12 +13,12 @@ namespace Game.Views
         [SerializeField] private Image _icon;
         [SerializeField] private Image _lock;
         [SerializeField] private Image _coin;
-        [SerializeField] private Image _progressBar;
         [SerializeField] private GameObject _income;
-        [SerializeField] private TextMeshProUGUI _time;
         [SerializeField] private TextMeshProUGUI _price;
         [SerializeField] private GameObject _priceContainter;
         [SerializeField] private SmartButton _smartButton;
+
+        [SerializeField] private TimeProgressView _timeProgressView;
 
         private PlanetPresenter _planetPresenter;
 
@@ -39,6 +38,9 @@ namespace Game.Views
                 .AddTo(this);
             _planetPresenter.Price
                 .Subscribe(price => _price.text = $"{price}")
+                .AddTo(this);
+            _planetPresenter.TimeProgressPresenter
+                .Subscribe(it => _timeProgressView.Init(it))
                 .AddTo(this);
         }
 

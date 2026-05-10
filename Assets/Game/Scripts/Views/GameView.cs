@@ -21,7 +21,7 @@ namespace Game.Views
 
         private void Awake()
         {
-            _gamePresenter.Presenters
+            _gamePresenter.PlanetPresenters
                 .ObserveAdd()
                 .Subscribe(it => InitPlanets(it.Value, it.Index))
                 .AddTo(this);
@@ -32,7 +32,6 @@ namespace Game.Views
             var views = _planetsContainer.Planets;
             if (index >= views.Count)
                 throw new Exception("Views Count is not equal to planetPresenters.Count");
-            Debug.Log($"p:{index}");
             views[index].Init(presenter);
         }
     }
