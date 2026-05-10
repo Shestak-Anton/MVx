@@ -21,16 +21,14 @@ namespace Game.Presenters
         void IInitializable.Initialize()
         {
             _money.Value = _moneyStorage.Money;
-            _moneyStorage.OnMoneySpent += OnSpend;
+            _moneyStorage.OnMoneyChanged += OnSpend;
         }
 
         void IDisposable.Dispose()
         {
+            _moneyStorage.OnMoneyChanged -= OnSpend;
         }
 
-        private void OnSpend(int newValue, int range)
-        {
-            _money.Value = newValue;
-        }
+        private void OnSpend(int newValue, int previous) => _money.Value = newValue;
     }
 }

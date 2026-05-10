@@ -26,25 +26,40 @@ namespace Game.Presenters
 
         private readonly IPlanet _planet;
         private readonly PlanetPresenterFactory<TimeProgressPresenter> _timeProgressPresenterFactory;
+        private readonly PlanetPopupPresenter _popupPresenter;
 
         [Inject]
         public PlanetPresenter(
             IPlanet planet,
-            PlanetPresenterFactory<TimeProgressPresenter> timeProgressPresenterFactory
+            PlanetPresenterFactory<TimeProgressPresenter> timeProgressPresenterFactory,
+            PlanetPopupPresenter popupPresenter
         )
         {
             _planet = planet;
             _timeProgressPresenterFactory = timeProgressPresenterFactory;
+            _popupPresenter = popupPresenter;
         }
 
         public void OnLongPress()
         {
+            if (!_planet.IsUnlocked) return;
+            _popupPresenter.Show(_planet);
         }
 
         public void OnShortPress()
         {
-            if (!_planet.CanUnlock) return;
-            _planet.Unlock();
+            if (_planet.IsUnlocked)
+            {
+                if (_planet.IsIncomeReady)
+                {
+                    _planet.GatherIncome();
+                }
+            }
+            else
+            {
+                if (!_planet.CanUnlock) return;
+                _planet.Unlock();
+            }
         }
 
         private void OnUnlocked()

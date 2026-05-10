@@ -598,6 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Views::Game.Views.TimeProgressView
   _progressBar: {fileID: 6948507870913343312}
   _time: {fileID: 8019802931863089282}
+  _container: {fileID: 5564512366540979095}
 --- !u!1 &6740194235726008877
 GameObject:
   m_ObjectHideFlags: 0

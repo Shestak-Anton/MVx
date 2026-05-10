@@ -10,6 +10,7 @@ namespace Game.Views
     {
         [SerializeField] private Image _progressBar;
         [SerializeField] private TextMeshProUGUI _time;
+        [SerializeField] private GameObject _container;
 
         public void Init(TimeProgressPresenter presenter)
         {
@@ -18,6 +19,9 @@ namespace Game.Views
                 .AddTo(this);
             presenter.Time
                 .Subscribe(it => _time.text = it)
+                .AddTo(this);
+            presenter.IsIncomeReady
+                .Subscribe(it => _container.SetActive(!it))
                 .AddTo(this);
         }
     }
