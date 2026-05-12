@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 4035766591218761423}
   - component: {fileID: 4556502046767129200}
   - component: {fileID: 3651887785645551189}
+  - component: {fileID: 5315411760243953528}
   m_Layer: 5
   m_Name: MoneyView
   m_TagString: Untagged
@@ -302,4 +303,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bed24a4a48441378bd11ad05ea46d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.CoinDepositView
-  _money: {fileID: 3299675748291971791}
+  _textView: {fileID: 5315411760243953528}
+--- !u!114 &5315411760243953528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207275897469232668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c10a618a2524e4092b196b74b2fa9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UIComponents::Modules.UI.CounterTextAnimation
+  _text: {fileID: 3299675748291971791}
+  _gainColor: {r: 0.5647059, g: 0.9333334, b: 0.5647059, a: 1}
+  _spendColor: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}

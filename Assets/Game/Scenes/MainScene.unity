@@ -983,6 +983,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &679611710 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6204055655084186918, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &680929136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1904,6 +1909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1465214279}
   - component: {fileID: 1465214280}
+  - component: {fileID: 1465214282}
   - component: {fileID: 1465214281}
   m_Layer: 5
   m_Name: Screen
@@ -1960,6 +1966,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.GameView
   _planetsContainer: {fileID: 974007727}
+  _particlesView: {fileID: 0}
+--- !u!114 &1465214282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465214278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fd987cdacf48ab940b56dcf20bb5c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.ParticlesView
+  _target: {fileID: 679611710}
+  _particleAnimator: {fileID: 1465214280}
 --- !u!1 &1556955875
 GameObject:
   m_ObjectHideFlags: 0

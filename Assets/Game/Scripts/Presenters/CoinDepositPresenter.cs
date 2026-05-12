@@ -7,8 +7,8 @@ namespace Game.Presenters
 {
     public sealed class CoinDepositPresenter : IInitializable, IDisposable
     {
-        public Observable<int> Money => _money;
-        private readonly ReactiveProperty<int> _money = new();
+        public Observable<(int from, int to)> Money => _money;
+        private readonly ReactiveProperty<(int from, int to)> _money = new();
 
         private readonly IMoneyStorage _moneyStorage;
 
@@ -20,7 +20,7 @@ namespace Game.Presenters
 
         void IInitializable.Initialize()
         {
-            _money.Value = _moneyStorage.Money;
+            _money.Value = (_moneyStorage.Money, _moneyStorage.Money);
             _moneyStorage.OnMoneyChanged += OnSpend;
         }
 
@@ -29,6 +29,6 @@ namespace Game.Presenters
             _moneyStorage.OnMoneyChanged -= OnSpend;
         }
 
-        private void OnSpend(int newValue, int previous) => _money.Value = newValue;
+        private void OnSpend(int newValue, int previous) => _money.Value = (previous, newValue);
     }
 }
