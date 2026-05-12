@@ -60,7 +60,7 @@ namespace Game.Presenters
             _icon.Value = _planet.GetIcon(_planet.IsUnlocked);
             _population.Value = $"Population: {_planet.Population}";
             _level.Value = $"Level: {_planet.Level}/{_planet.MaxLevel}";
-            _income.Value = $"Level: {Math.Round(_planet.MinuteIncome / 60f)} / sec";
+            _income.Value = $"Income: {Math.Round(_planet.MinuteIncome / 60f)} / sec";
             _cost.Value = _planet.Price.ToString();
             _isMaxLevelReached.Value = _planet.IsMaxLevel;
         }

@@ -10,13 +10,16 @@ namespace Game.Views
     public sealed class GameView : MonoBehaviour
     {
         [SerializeField] private PlanetsContainer _planetsContainer;
+        [SerializeField] private ParticlesView _particlesView;
 
         private GamePresenter _gamePresenter;
+        private ParticlesPresenter _particlesPresenter;
 
         [Inject]
-        public void Build(GamePresenter gamePresenter)
+        public void Build(GamePresenter gamePresenter, ParticlesPresenter particlesPresenter)
         {
             _gamePresenter = gamePresenter;
+            _particlesPresenter = particlesPresenter;
         }
 
         private void Awake()
@@ -32,7 +35,9 @@ namespace Game.Views
             var views = _planetsContainer.Planets;
             if (index >= views.Count)
                 throw new Exception("Views Count is not equal to planetPresenters.Count");
-            views[index].Init(presenter);
+            var planetView = views[index];
+            planetView.Init(presenter);
+            _particlesPresenter.AddPoint((presenter.Planet, planetView.CoinPosition));
         }
     }
 }

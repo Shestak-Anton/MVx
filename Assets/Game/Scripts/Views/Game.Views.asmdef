@@ -7,7 +7,8 @@
         "Zenject",
         "dotweenModules",
         "Presentation",
-        "R3.Unity"
+        "R3.Unity",
+        "Planets"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -7,37 +7,39 @@ namespace Game.Presenters
 {
     public sealed class PlanetPresenter : IPresenter
     {
-        // locked
         private readonly ReactiveProperty<bool> _isUnlocked = new();
-
         public Observable<bool> IsUnlocked => _isUnlocked;
 
-        // icon
         private readonly ReactiveProperty<Sprite> _sprite = new();
-
         public Observable<Sprite> Sprite => _sprite;
 
-        // price
         private readonly ReactiveProperty<int> _price = new();
         public Observable<string> Price => _price.Select(it => $"{it}");
-        
+
         private readonly ReactiveProperty<TimeProgressPresenter> _timeProgressPresenter = new();
         public Observable<TimeProgressPresenter> TimeProgressPresenter => _timeProgressPresenter;
 
+        private readonly ReactiveProperty<CoinPresenter> _coinPresenter = new();
+        public Observable<CoinPresenter> CoinPresenter => _coinPresenter;
+
         private readonly IPlanet _planet;
         private readonly PlanetPresenterFactory<TimeProgressPresenter> _timeProgressPresenterFactory;
+        private readonly PlanetPresenterFactory<CoinPresenter> _coinPresenterFactory;
         private readonly PlanetPopupPresenter _popupPresenter;
+        
+        public IPlanet Planet => _planet;
 
         [Inject]
         public PlanetPresenter(
             IPlanet planet,
             PlanetPresenterFactory<TimeProgressPresenter> timeProgressPresenterFactory,
-            PlanetPopupPresenter popupPresenter
-        )
+            PlanetPopupPresenter popupPresenter,
+            PlanetPresenterFactory<CoinPresenter> coinPresenterFactory)
         {
             _planet = planet;
             _timeProgressPresenterFactory = timeProgressPresenterFactory;
             _popupPresenter = popupPresenter;
+            _coinPresenterFactory = coinPresenterFactory;
         }
 
         public void OnLongPress()
@@ -62,15 +64,10 @@ namespace Game.Presenters
             }
         }
 
-        private void OnUnlocked()
-        {
-            _sprite.Value = _planet.GetIcon(true);
-            _isUnlocked.Value = true;
-        }
-
         public void Initialize()
         {
             _timeProgressPresenter.Value = _timeProgressPresenterFactory.Create(_planet);
+            _coinPresenter.Value = _coinPresenterFactory.Create(_planet);
 
             _sprite.Value = _planet.GetIcon(_planet.IsUnlocked);
             _isUnlocked.Value = _planet.IsUnlocked;
@@ -82,6 +79,12 @@ namespace Game.Presenters
         public void Dispose()
         {
             _planet.OnUnlocked -= OnUnlocked;
+        }
+
+        private void OnUnlocked()
+        {
+            _sprite.Value = _planet.GetIcon(true);
+            _isUnlocked.Value = true;
         }
     }
 }

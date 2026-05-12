@@ -146,13 +146,15 @@ GameObject:
   - component: {fileID: 8193891107021228721}
   - component: {fileID: 648301223005266422}
   - component: {fileID: 3509156194491149301}
+  - component: {fileID: 6398104404600725190}
+  - component: {fileID: 6761436419070784190}
   m_Layer: 5
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4069365071620109237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -224,6 +226,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatDistance: 40
   duration: 2
+--- !u!114 &6398104404600725190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320550912344372757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382fb79e247b47f2be6389da164fecc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.CoinView
+  _rectTransform: {fileID: 4069365071620109237}
+  _canvasGroup: {fileID: 6761436419070784190}
+--- !u!225 &6761436419070784190
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320550912344372757}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &383599552409175847
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +534,7 @@ MonoBehaviour:
   _priceContainter: {fileID: 6850814019076832775}
   _smartButton: {fileID: 5583372068559771244}
   _timeProgressView: {fileID: 3146794706767981009}
+  _coinView: {fileID: 6398104404600725190}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,11 @@ namespace Game.Views
                 .FromComponentInHierarchy()
                 .AsCached();
             Container
-                .Bind<PlanetView>()
+                .Bind<ParticlesView>()
+                .FromComponentInHierarchy()
+                .AsCached();
+            Container
+                .Bind<GameView>()
                 .FromComponentInHierarchy()
                 .AsCached();
         }

@@ -1,6 +1,5 @@
 using Game.Presenters;
 using Modules.UI;
-using ObservableCollections;
 using R3;
 using TMPro;
 using UnityEngine;
@@ -19,6 +18,9 @@ namespace Game.Views
         [SerializeField] private SmartButton _smartButton;
 
         [SerializeField] private TimeProgressView _timeProgressView;
+        [SerializeField] private CoinView _coinView;
+        
+        public Vector3 CoinPosition => _coinView.Position;
 
         private PlanetPresenter _planetPresenter;
 
@@ -40,7 +42,10 @@ namespace Game.Views
                 .Subscribe(price => _price.text = $"{price}")
                 .AddTo(this);
             _planetPresenter.TimeProgressPresenter
-                .Subscribe(it => _timeProgressView.Init(it))
+                .Subscribe(_timeProgressView.Init)
+                .AddTo(this);
+            _planetPresenter.CoinPresenter
+                .Subscribe(_coinView.Init)
                 .AddTo(this);
         }
 
