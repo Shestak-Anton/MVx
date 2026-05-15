@@ -11,15 +11,11 @@ namespace Game.Views
                 .FromComponentInHierarchy()
                 .AsSingle();
             Container
-                .Bind<CoinDepositView>()
+                .Bind<MoneyView>()
                 .FromComponentInHierarchy()
                 .AsCached();
             Container
                 .Bind<ParticlesView>()
-                .FromComponentInHierarchy()
-                .AsCached();
-            Container
-                .Bind<GameView>()
                 .FromComponentInHierarchy()
                 .AsCached();
         }

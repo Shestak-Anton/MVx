@@ -7,11 +7,9 @@ namespace Modules.UI
 {
     public sealed class ParticleAnimator : MonoBehaviour
     {
-        [SerializeField]
-        private RectTransform _particlePrefab;
+        [SerializeField] private RectTransform _particlePrefab;
 
-        [SerializeField]
-        private Transform _parent;
+        [SerializeField] private Transform _parent;
 
         private readonly Queue<RectTransform> _queue = new();
 
@@ -25,13 +23,30 @@ namespace Modules.UI
             particle.transform.SetPositionAndRotation(from, Quaternion.identity);
             particle
                 .DOMove(to, duration)
-                .SetEase(Ease.OutExpo) 
+                .SetEase(Ease.OutExpo)
                 .OnComplete(() =>
                 {
                     onFinished?.Invoke();
                     _queue.Enqueue(particle);
                     particle.gameObject.SetActive(false);
                 });
+        }
+
+        // new
+        public RectTransform GetParticle()
+        {
+            if (_queue.TryDequeue(out var particle))
+                particle.gameObject.SetActive(true);
+            else
+                particle = Instantiate(_particlePrefab, _parent);
+
+            return particle;
+        }
+
+        public void Disable(RectTransform particle)
+        {
+            _queue.Enqueue(particle);
+            particle.gameObject.SetActive(false);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Modules.Planets;
 using R3;
 using UnityEngine;
@@ -35,6 +34,7 @@ namespace Game.Presenters
 
         public void Hide()
         {
+            DisposeSubscriptions();
             _isVisible.Value = false;
             _planet = null;
         }
@@ -42,27 +42,48 @@ namespace Game.Presenters
         public void Show(IPlanet planet)
         {
             _planet = planet;
-            InvalidateData();
+            InitData();
             _isVisible.Value = true;
+            InitSubscriptions();
         }
 
-        public void Upgrade()
+        public void Upgrade() => _planet.Upgrade();
+
+        private void InitSubscriptions()
         {
-            if (_planet.Upgrade())
-            {
-                InvalidateData();
-            }
+            _planet.OnPopulationChanged += OnPopulationChanged;
+            _planet.OnIncomeChanged += OnIncomeChanged;
+            _planet.OnUpgraded += OnLevelChanged;
         }
 
-        private void InvalidateData()
+        private void DisposeSubscriptions()
+        {
+            _planet.OnPopulationChanged -= OnPopulationChanged;
+            _planet.OnIncomeChanged -= OnIncomeChanged;
+            _planet.OnUpgraded -= OnLevelChanged;
+        }
+
+        private void OnPopulationChanged(int population) => _population.Value = $"Population: {population}";
+
+        private void OnIncomeChanged(int income) => _income.Value = $"Income: {income}$";
+
+        private void OnLevelChanged(int level)
+        {
+            _level.Value = $"Level: {level}/{_planet.MaxLevel}";
+            _cost.Value = _planet.Price.ToString();
+            _isMaxLevelReached.Value = _planet.IsMaxLevel;
+        }
+
+
+        private void InitData()
         {
             _title.Value = _planet.Name;
             _icon.Value = _planet.GetIcon(_planet.IsUnlocked);
-            _population.Value = $"Population: {_planet.Population}";
             _level.Value = $"Level: {_planet.Level}/{_planet.MaxLevel}";
-            _income.Value = $"Income: {_planet.MinuteIncome}$";
             _cost.Value = _planet.Price.ToString();
             _isMaxLevelReached.Value = _planet.IsMaxLevel;
+            _income.Value = $"Income: {_planet.MinuteIncome}$";
+            _population.Value = $"Population: {_planet.Population}";
         }
     }
 }

@@ -1,6 +1,7 @@
 using Game.Presenters;
 using Modules.UI;
 using R3;
+using R3.Triggers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +20,6 @@ namespace Game.Views
 
         [SerializeField] private TimeProgressView _timeProgressView;
         [SerializeField] private CoinView _coinView;
-        
-        public Vector3 CoinPosition => _coinView.Position;
 
         private PlanetPresenter _planetPresenter;
 
@@ -46,6 +45,11 @@ namespace Game.Views
                 .AddTo(this);
             _planetPresenter.CoinPresenter
                 .Subscribe(_coinView.Init)
+                .AddTo(this);
+
+            this.LateUpdateAsObservable()
+                .Take(1)
+                .Subscribe(_ => _planetPresenter.OnCoinPositionReady(_coinView.Position))
                 .AddTo(this);
         }
 

@@ -16,13 +16,13 @@ namespace Game.Presenters
                 .BindInterfacesAndSelfTo<PlanetPopupPresenter>()
                 .AsSingle();
             Container
-                .BindInterfacesAndSelfTo<GamePresenter>()
+                .BindInterfacesAndSelfTo<PlanetCollectionPresenter>()
                 .AsSingle();
             Container
                 .BindInterfacesAndSelfTo<ParticlesPresenter>()
                 .AsSingle();
             Container
-                .BindInterfacesAndSelfTo<CoinDepositPresenter>()
+                .BindInterfacesAndSelfTo<MoneyPresenter>()
                 .AsSingle();
             
             BindPlanetPresenterFactory<PlanetPresenter>();

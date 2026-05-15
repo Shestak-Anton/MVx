@@ -19,46 +19,39 @@ namespace Game.Views
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private GameObject _popup;
 
-        private PlanetPopupPresenter _planetPopupPresenter;
-
         [Inject]
-        public void Construct(PlanetPopupPresenter presenter)
-        {
-            _planetPopupPresenter = presenter;
-        }
-
-        private void Awake()
+        public void Construct(PlanetPopupPresenter planetPopupPresenter)
         {
             _closeButton.OnClickAsObservable()
-                .Subscribe(_ => _planetPopupPresenter.Hide())
+                .Subscribe(_ => planetPopupPresenter.Hide())
                 .AddTo(this);
             _upgradeButton.OnClickAsObservable()
-                .Subscribe(_ => _planetPopupPresenter.Upgrade())
+                .Subscribe(_ => planetPopupPresenter.Upgrade())
                 .AddTo(this);
 
-            _planetPopupPresenter.IsMaxLevelReached
+            planetPopupPresenter.IsMaxLevelReached
                 .Subscribe(it => _upgradeButton.gameObject.SetActive(!it))
                 .AddTo(this);
-            _planetPopupPresenter.Title
+            planetPopupPresenter.Title
                 .Subscribe(it => _title.text = it)
                 .AddTo(this);
-            _planetPopupPresenter.Population
+            planetPopupPresenter.Population
                 .Subscribe(it => _population.text = it)
                 .AddTo(this);
-            _planetPopupPresenter.Income
+            planetPopupPresenter.Income
                 .Subscribe(it => _income.text = it)
                 .AddTo(this);
-            _planetPopupPresenter.Level
+            planetPopupPresenter.Level
                 .Subscribe(it => _level.text = it)
                 .AddTo(this);
-            _planetPopupPresenter.Cost
+            planetPopupPresenter.Cost
                 .Subscribe(it => _price.text = it)
                 .AddTo(this);
-            _planetPopupPresenter.Icon
+            planetPopupPresenter.Icon
                 .Subscribe(it => _icon.sprite = it)
                 .AddTo(this);
             
-            _planetPopupPresenter.IsVisible
+            planetPopupPresenter.IsVisible
                 .Subscribe(SetIsVisible)
                 .AddTo(this);
         }

@@ -26,20 +26,23 @@ namespace Game.Presenters
         private readonly PlanetPresenterFactory<TimeProgressPresenter> _timeProgressPresenterFactory;
         private readonly PlanetPresenterFactory<CoinPresenter> _coinPresenterFactory;
         private readonly PlanetPopupPresenter _popupPresenter;
-        
-        public IPlanet Planet => _planet;
+        private readonly ParticlesPresenter _particlesPresenter;
+
+        private Vector3? _coinPosition;
 
         [Inject]
         public PlanetPresenter(
             IPlanet planet,
             PlanetPresenterFactory<TimeProgressPresenter> timeProgressPresenterFactory,
             PlanetPopupPresenter popupPresenter,
-            PlanetPresenterFactory<CoinPresenter> coinPresenterFactory)
+            PlanetPresenterFactory<CoinPresenter> coinPresenterFactory,
+            ParticlesPresenter particlesPresenter)
         {
             _planet = planet;
             _timeProgressPresenterFactory = timeProgressPresenterFactory;
             _popupPresenter = popupPresenter;
             _coinPresenterFactory = coinPresenterFactory;
+            _particlesPresenter = particlesPresenter;
         }
 
         public void OnLongPress()
@@ -54,7 +57,7 @@ namespace Game.Presenters
             {
                 if (_planet.IsIncomeReady)
                 {
-                    _planet.GatherIncome();
+                    TryCollectMoney();
                 }
             }
             else
@@ -63,6 +66,8 @@ namespace Game.Presenters
                 _planet.Unlock();
             }
         }
+
+        public void OnCoinPositionReady(Vector3 position) => _coinPosition = position;
 
         public void Initialize()
         {
@@ -85,6 +90,14 @@ namespace Game.Presenters
         {
             _sprite.Value = _planet.GetIcon(true);
             _isUnlocked.Value = true;
+        }
+
+        private void TryCollectMoney()
+        {
+            if (_coinPosition.HasValue)
+            {
+                _particlesPresenter.OnCoinGathered(_coinPosition.Value, _planet);
+            }
         }
     }
 }

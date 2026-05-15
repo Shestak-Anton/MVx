@@ -16,23 +16,22 @@ namespace Modules.UI
         {
             _rectTransform = _text.GetComponent<RectTransform>();
         }
+        
+        public void SetText(string text) => _text.text = text;
 
-        public void Init(int initial)
-        {
-            _text.text = initial.ToString();
-        }
+        public void AnimateEarned() => Animate(isSpent: false);
 
-        public void Animate(int from, int to, float delay = 0.0f, float duration = 0.3f)
+        public void AnimateSpent() => Animate(isSpent: true);
+
+        private void Animate(bool isSpent, float delay = 0.0f, float duration = 0.3f)
         {
             const string colorId = "CounterTextView.textColor";
             const string scaleId = "CounterTextView.textScale";
-            const string counterId = "CounterTextView.counter";
 
             DOTween.Kill(colorId, true);
             DOTween.Kill(scaleId, true);
-            DOTween.Kill(counterId, true);
 
-            _text.DOColor(from > to ? _spendColor : _gainColor, duration)
+            _text.DOColor(isSpent ? _spendColor : _gainColor, duration)
                 .SetDelay(delay)
                 .SetLoops(2, LoopType.Yoyo)
                 .SetId(colorId);
@@ -41,20 +40,6 @@ namespace Modules.UI
                 .SetDelay(delay)
                 .SetLoops(2, LoopType.Yoyo)
                 .SetId(scaleId);
-
-            var newValue = from;
-            DOTween.To(
-                    getter: () => newValue,
-                    setter: value =>
-                    {
-                        newValue = value;
-                        _text.text = newValue.ToString();
-                    },
-                    endValue: to,
-                    duration
-                )
-                .SetDelay(delay)
-                .SetId(counterId);
         }
     }
 }

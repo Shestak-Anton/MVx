@@ -8,7 +8,7 @@ namespace Game.Presenters
     public sealed class TimeProgressPresenter : IPresenter
     {
         private readonly ReactiveProperty<float> _progress = new();
-        public Observable<float> Progress => _progress.Select(_ => 1f - _planet.IncomeProgress);
+        public Observable<float> Progress => _progress.Select(_ => _planet.IncomeProgress);
         public Observable<string> Time => _progress.Select(FormatTime);
 
         private readonly ReactiveProperty<bool> _isIncomeReady = new();

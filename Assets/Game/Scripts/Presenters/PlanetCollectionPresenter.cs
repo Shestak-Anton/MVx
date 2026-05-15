@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game.Presenters
 {
-    public sealed class GamePresenter : IPresenter
+    public sealed class PlanetCollectionPresenter : IPresenter
     {
         public IObservableCollection<PlanetPresenter> PlanetPresenters => _planetPresenters;
         private readonly ObservableList<PlanetPresenter> _planetPresenters = new();
@@ -14,7 +14,7 @@ namespace Game.Presenters
         private readonly List<IPlanet> _planets;
 
         [Inject]
-        public GamePresenter(
+        public PlanetCollectionPresenter(
             List<IPlanet> planets,
             PlanetPresenterFactory<PlanetPresenter> planetPresenterFactory
         )
