@@ -1524,7 +1524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5d6755b8b94e9ab06f3c5b1e3803b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.PlanetsContainer
-  <Planets>k__BackingField:
+  _planets:
   - {fileID: 7566780103441064639}
   - {fileID: 52783608}
   - {fileID: 734240812}
@@ -1534,6 +1534,7 @@ MonoBehaviour:
   - {fileID: 1247079642}
   - {fileID: 1000499688}
   - {fileID: 249258345}
+  _particlesView: {fileID: 1465214282}
 --- !u!1001 &1000499686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1965,8 +1966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76807d201fbf4357b153d8ec174e5856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.GameView
-  _planetsContainer: {fileID: 974007727}
-  _particlesView: {fileID: 0}
+  planetCollectionView: {fileID: 0}
 --- !u!114 &1465214282
 MonoBehaviour:
   m_ObjectHideFlags: 0
